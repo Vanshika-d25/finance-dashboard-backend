@@ -1,16 +1,9 @@
-const User = require("./user.model");
+const userService = require("./user.service");
 
 // Create User
 const createUser = async (req, res) => {
   try {
-    const { name, email, role, status } = req.body;
-
-    const user = await User.create({
-      name,
-      email,
-      role,
-      status,
-    });
+    const user = await userService.createUser(req.body);
 
     res.status(201).json({
       message: "User created successfully",
@@ -23,10 +16,10 @@ const createUser = async (req, res) => {
   }
 };
 
-// Get all users
+// Get Users
 const getUsers = async (req, res) => {
   try {
-    const users = await User.find();
+    const users = await userService.getUsers();
 
     res.status(200).json({
       message: "Users fetched successfully",
@@ -38,15 +31,13 @@ const getUsers = async (req, res) => {
     });
   }
 };
-// Update user
+
+// Update User
 const updateUser = async (req, res) => {
   try {
-    const { id } = req.params;
-
-    const updatedUser = await User.findByIdAndUpdate(
-      id,
-      req.body,
-      { new: true, runValidators: true }
+    const updatedUser = await userService.updateUser(
+      req.params.id,
+      req.body
     );
 
     if (!updatedUser) {
@@ -65,12 +56,11 @@ const updateUser = async (req, res) => {
     });
   }
 };
-// Delete user
+
+// Delete User
 const deleteUser = async (req, res) => {
   try {
-    const { id } = req.params;
-
-    const deletedUser = await User.findByIdAndDelete(id);
+    const deletedUser = await userService.deleteUser(req.params.id);
 
     if (!deletedUser) {
       return res.status(404).json({
