@@ -2,6 +2,11 @@ const express = require("express");
 const router = express.Router();
 
 const { createUser, getUsers, updateUser, deleteUser} = require("./user.controller");
+const { validateCreateUser } = require("./user.validator");
+
+
+
+router.post("/", validateCreateUser, createUser);
 
 router.get("/", getUsers);
 
