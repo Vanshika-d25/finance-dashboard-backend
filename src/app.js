@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const transactionRoutes = require("./modules/transaction/transaction.routes");
+const summaryRoutes = require("./modules/summary/summary.routes");
+
 
 const app = express();
 
@@ -13,6 +15,8 @@ const userRoutes = require("./modules/users/user.routes");
 app.use("/users", userRoutes);
 
 app.use("/transactions", transactionRoutes);
+
+app.use("/summary", summaryRoutes);
 
 // Test route
 app.get("/", (req, res) => {
