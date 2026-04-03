@@ -19,11 +19,11 @@ const createTransaction = async (req, res) => {
 // Get all transactions
 const getTransactions = async (req, res) => {
   try {
-    const transactions = await transactionService.getTransactions(req.query);
+    const result = await transactionService.getTransactions(req.query);
 
     res.status(200).json({
       message: "Transactions fetched successfully",
-      data: transactions,
+      ...result,
     });
   } catch (error) {
     res.status(500).json({

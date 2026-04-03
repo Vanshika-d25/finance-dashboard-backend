@@ -7,7 +7,7 @@ const createTransaction = async (data) => {
 
 // Get all transactions
 const getTransactions = async (query) => {
-  const { type, category } = query;
+  const { type, category, page = 1, limit = 5 } = query;
 
   let filter = {};
 
@@ -19,7 +19,21 @@ const getTransactions = async (query) => {
     filter.category = category;
   }
 
-  return await Transaction.find(filter).populate("createdBy", "name email");
+  const skip = (page - 1) * limit;
+
+  const transactions = await Transaction.find(filter)
+    .skip(skip)
+    .limit(Number(limit))
+    .populate("createdBy", "name email");
+
+  const total = await Transaction.countDocuments(filter);
+
+  return {
+    total,
+    page: Number(page),
+    limit: Number(limit),
+    transactions,
+  };
 };
 
 module.exports = {
