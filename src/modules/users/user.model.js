@@ -27,11 +27,23 @@ const userSchema = new mongoose.Schema(
       enum: ["active", "inactive"],
       default: "active",
     },
+  
+password: {
+  type: String,
+  required: true,
+},
   },
   {
     timestamps: true,
   }
 );
+
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) return next();
+
+  this.password = await bcrypt.hash(this.password, 10);
+  next();
+});
 
 const User = mongoose.model("User", userSchema);
 
