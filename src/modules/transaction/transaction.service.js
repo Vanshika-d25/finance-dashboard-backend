@@ -6,8 +6,20 @@ const createTransaction = async (data) => {
 };
 
 // Get all transactions
-const getTransactions = async () => {
-  return await Transaction.find().populate("createdBy", "name email");
+const getTransactions = async (query) => {
+  const { type, category } = query;
+
+  let filter = {};
+
+  if (type) {
+    filter.type = type;
+  }
+
+  if (category) {
+    filter.category = category;
+  }
+
+  return await Transaction.find(filter).populate("createdBy", "name email");
 };
 
 module.exports = {
