@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { validateCreateTransaction } = require("./transaction.validator");
 
 const {
   createTransaction,
@@ -11,5 +12,7 @@ router
   .route("/")
   .get(getTransactions)
   .post(createTransaction);
+
+router.post("/", validateCreateTransaction, createTransaction);
 
 module.exports = router;
