@@ -1,5 +1,6 @@
 const transactionService = require("./transaction.service");
 
+console.log("USER:", req.user);
 // Create transaction
 const createTransaction = async (req, res) => {
   try {
