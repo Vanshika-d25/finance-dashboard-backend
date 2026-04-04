@@ -42,6 +42,56 @@ const loginUser = async (email, password) => {
   };
 };
 
+const User = require("../modules/users/user.model");
+
+const seedUsers = async () => {
+  try {
+    const users = [
+      {
+        name: "Admin User",
+        email: "admin@test.com",
+        password: "123456",
+        role: "admin",
+      },
+      {
+        name: "Analyst User",
+        email: "analyst@test.com",
+        password: "123456",
+        role: "analyst",
+      },
+      {
+        name: "Viewer User",
+        email: "viewer@test.com",
+        password: "123456",
+        role: "viewer",
+      },
+    ];
+
+    for (let userData of users) {
+      const existing = await User.findOne({ email: userData.email });
+
+      if (!existing) {
+        await User.create(userData);
+        console.log(`${userData.role} created`);
+      }
+    }
+  } catch (error) {
+    console.log("Seeding error:", error.message);
+  }
+};
+const registerUser = async (data) => {
+  const existing = await User.findOne({ email: data.email });
+
+  if (existing) {
+    throw new Error("User already exists");
+  }
+
+  const user = await User.create(data);
+
+  return user;
+};
+
 module.exports = {
   loginUser,
+  registerUser,
 };
