@@ -19,6 +19,7 @@ app.use("/transactions", transactionRoutes);
 app.use("/summary", summaryRoutes);
 app.use("/auth", authRoutes);
 
+
 // Test route
 app.get("/", (req, res) => {
   res.json({ message: "API is running" });

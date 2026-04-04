@@ -42,7 +42,6 @@ const loginUser = async (email, password) => {
   };
 };
 
-const User = require("../modules/users/user.model");
 
 const seedUsers = async () => {
   try {
