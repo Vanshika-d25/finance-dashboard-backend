@@ -3,9 +3,11 @@ const transactionService = require("./transaction.service");
 // Create transaction
 const createTransaction = async (req, res) => {
   try {
+    const userId = req.user.id || req.user._id; 
+
     const data = {
       ...req.body,
-      createdBy: req.user.id, 
+      createdBy: userId,
     };
 
     const transaction = await transactionService.createTransaction(data);
