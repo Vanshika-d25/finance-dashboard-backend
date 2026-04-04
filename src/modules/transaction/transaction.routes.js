@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+
+const protect = require("../../middlewares/auth.middleware");
 const { validateCreateTransaction } = require("./transaction.validator");
 
 const {
@@ -7,12 +9,10 @@ const {
   getTransactions,
 } = require("./transaction.controller");
 
-// GET + POST /transactions
+// GET + POST /transactions (PROTECTED)
 router
   .route("/")
-  .get(getTransactions)
-  .post(createTransaction);
-
-router.post("/", validateCreateTransaction, createTransaction);
+  .get(protect, getTransactions)
+  .post(protect, validateCreateTransaction, createTransaction);
 
 module.exports = router;
