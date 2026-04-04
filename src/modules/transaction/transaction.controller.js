@@ -3,7 +3,12 @@ const transactionService = require("./transaction.service");
 // Create transaction
 const createTransaction = async (req, res) => {
   try {
-    const transaction = await transactionService.createTransaction(req.body);
+    const data = {
+      ...req.body,
+      createdBy: req.user.id, 
+    };
+
+    const transaction = await transactionService.createTransaction(data);
 
     res.status(201).json({
       message: "Transaction created successfully",
@@ -15,7 +20,6 @@ const createTransaction = async (req, res) => {
     });
   }
 };
-
 // Get all transactions
 const getTransactions = async (req, res) => {
   try {
