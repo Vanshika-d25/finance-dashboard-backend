@@ -1,12 +1,20 @@
 const express = require("express");
 const router = express.Router();
 
-const { getSummary, getCategorySummary,getTrends, } = require("./summary.controller");
+const protect = require("../../middlewares/auth.middleware");
+const authorize = require("../../middlewares/role.middleware");
 
+const {
+  getSummary,
+  getCategorySummary,
+  getTrends,
+} = require("./summary.controller");
 
-router.get("/", getSummary);
-router.get("/category", getCategorySummary);
-router.get("/trends", getTrends);
+// 🔐 Protected summary routes
+router.get("/", protect, authorize("admin", "analyst"), getSummary);
 
+router.get("/category", protect, authorize("admin", "analyst"), getCategorySummary);
+
+router.get("/trends", protect, authorize("admin", "analyst"), getTrends);
 
 module.exports = router;
