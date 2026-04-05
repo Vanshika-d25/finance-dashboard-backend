@@ -88,4 +88,6 @@ const getTransactions = async (req, res) => {
 module.exports = {
   createTransaction,
   getTransactions,
+  updateTransaction,
+  deleteTransaction,
 };

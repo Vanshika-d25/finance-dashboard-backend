@@ -4,32 +4,23 @@ const router = express.Router();
 const protect = require("../../middlewares/auth.middleware");
 const authorize = require("../../middlewares/role.middleware");
 
-
-const { validateCreateTransaction } = require("./transaction.validator");
-
 const {
   createTransaction,
   getTransactions,
+  updateTransaction,
+  deleteTransaction
 } = require("./transaction.controller");
 
-// GET + POST /transactions (PROTECTED)
+// GET + POST
 router
   .route("/")
   .get(protect, authorize("admin", "analyst", "viewer"), getTransactions)
-  .post(protect, authorize("admin"), validateCreateTransaction, createTransaction);
+  .post(protect, authorize("admin"), createTransaction);
 
-router.patch(
-  "/:id",
-  protect,
-  authorize("admin"),
-  updateTransaction
-);
+// UPDATE
+router.patch("/:id", protect, authorize("admin"), updateTransaction);
 
-router.delete(
-  "/:id",
-  protect,
-  authorize("admin"),
-  deleteTransaction
-);
+// DELETE
+router.delete("/:id", protect, authorize("admin"), deleteTransaction);
 
 module.exports = router;
