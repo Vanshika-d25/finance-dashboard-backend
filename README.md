@@ -1,10 +1,10 @@
-# 📊 Finance Dashboard Backend
+# Finance Dashboard Backend
 
 A scalable backend system for managing financial records with role-based access control, analytics, and secure APIs.
 
 ---
 
-## 🚀 Features
+## Features
 
 - User and Role Management (Admin, Analyst, Viewer)
 - Financial Records CRUD (Create, Read, Update, Delete)
@@ -16,7 +16,7 @@ A scalable backend system for managing financial records with role-based access 
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - Backend: Node.js, Express.js  
 - Database: MongoDB (Mongoose ODM)  
@@ -25,7 +25,7 @@ A scalable backend system for managing financial records with role-based access 
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 src/
  ├── config/
@@ -40,7 +40,7 @@ src/
 
 ---
 
-## 🔐 Demo Credentials (Seeded Users)
+##  Demo Credentials (Seeded Users)
 
 The application includes pre-seeded users for testing:
 
@@ -54,7 +54,7 @@ Note: These users are automatically created when the server starts.
 
 ---
 
-## 🔑 Authentication
+## Authentication
 
 POST /auth/login
 
@@ -69,7 +69,7 @@ Authorization: Bearer <your_token>
 
 ---
 
-## 📌 API Endpoints
+## API Endpoints
 
 ### Transactions
 
@@ -97,7 +97,7 @@ DELETE  /users/:id        (Admin)
 
 ---
 
-## 🔍 Filtering & Pagination
+## Filtering & Pagination
 
 GET /transactions?type=income&category=Salary&page=1&limit=5
 
@@ -107,7 +107,7 @@ GET /transactions?startDate=2026-01-01&endDate=2026-12-31
 ---
 
 
-## ⚠️ Limitations & Future Improvements
+##  Limitations & Future Improvements
 
 - Add recent activity API  
 - Add weekly trends  
@@ -118,7 +118,7 @@ GET /transactions?startDate=2026-01-01&endDate=2026-12-31
 
 ---
 
-## 🧠 Technical Highlights
+##  Technical Highlights
 
 - Modular architecture (Controller-Service-Model pattern)
 - MongoDB aggregation for analytics
@@ -127,12 +127,12 @@ GET /transactions?startDate=2026-01-01&endDate=2026-12-31
 
 ---
 
-## 🌐 Deployment
+##  Deployment
 
 Backend is deployed on Render.
 
 ---
 
-## 💬 Author
+##  Author
 
 Vanshika Dixit
