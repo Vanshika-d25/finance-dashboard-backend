@@ -1,10 +1,9 @@
 const transactionService = require("./transaction.service");
-const { updateTransaction, deleteTransaction } = require("./transaction.controller");
 
 // Create transaction
 const createTransaction = async (req, res) => {
   try {
-    const userId = req.user.id || req.user._id; 
+    const userId = req.user.id || req.user._id;
 
     const data = {
       ...req.body,
@@ -12,8 +11,7 @@ const createTransaction = async (req, res) => {
     };
 
     const transaction = await transactionService.createTransaction(data);
-    
-    console.log("USER:", req.user);
+
     res.status(201).json({
       message: "Transaction created successfully",
       data: transaction,
@@ -24,7 +22,8 @@ const createTransaction = async (req, res) => {
     });
   }
 };
-//update transactions
+
+// Update transaction
 const updateTransaction = async (req, res) => {
   try {
     const updated = await transactionService.updateTransaction(
@@ -49,7 +48,7 @@ const updateTransaction = async (req, res) => {
   }
 };
 
-//update transactions
+// Delete transaction
 const deleteTransaction = async (req, res) => {
   try {
     const deleted = await transactionService.deleteTransaction(req.params.id);
@@ -69,7 +68,8 @@ const deleteTransaction = async (req, res) => {
     });
   }
 };
-// Get all transactions
+
+// Get transactions
 const getTransactions = async (req, res) => {
   try {
     const result = await transactionService.getTransactions(req.query);
