@@ -18,4 +18,18 @@ router
   .get(protect, authorize("admin", "analyst", "viewer"), getTransactions)
   .post(protect, authorize("admin"), validateCreateTransaction, createTransaction);
 
+router.patch(
+  "/:id",
+  protect,
+  authorize("admin"),
+  updateTransaction
+);
+
+router.delete(
+  "/:id",
+  protect,
+  authorize("admin"),
+  deleteTransaction
+);
+
 module.exports = router;
